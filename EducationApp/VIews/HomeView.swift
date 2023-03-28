@@ -1,4 +1,4 @@
-//
+////
 //  ContentView.swift
 //  EducationApp
 //
@@ -14,22 +14,43 @@ struct HomeView: View {
     var body: some View {
        
         
-        ScrollView {
-            LazyVStack {
-                ForEach(model.modules) { module in
-                    //Learning Card
-                    HomeViewRow(image: module.content.image, title: "Learn \(module.category)", description: module.content.description, count: String(module.content.lessons.count), time: module.content.time)
+        NavigationView {
+            VStack(alignment: .leading) {
+            Text("What do you want to do today?")
+                    .padding(.leading, 20)
+            ScrollView {
+                LazyVStack {
                     
-                    //Test Card
-                    HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: String(module.content.lessons.count), time: module.test.time)
+                    ForEach(model.modules) { module in
+                        
+                        VStack(spacing: 20) {
+                        //Learning Card
+                            NavigationLink(
+                                destination:
+                                    ContentView()
+                                    .onAppear(perform: {
+                                        model.beginModule(moduleid: module.id)
+                            }),
+                                label: {
+                                HomeViewRow(image: module.content.image, title: "Learn \(module.category)", description: module.content.description, count:String(module.content.lessons.count), time: module.content.time, type: "Lessons")
+                                })
+                            
+                                           
+                                //Test Card
+                                HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: String(module.test.questions.count), time: String("\((module.test.time).prefix(6))s"), type: "Questions")
+                        }
+                    }
                 }
+                .accentColor(.black)
+                .padding()
             }
-            .padding()
+        }
+        .navigationTitle("Get Started")
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(ContentModel())

@@ -16,10 +16,10 @@ struct HomeViewRow: View {
     var description: String
     var count: String
     var time: String
+    var type: String
     
     var body: some View {
         
-                    //Test Card
         ZStack {
             
             Rectangle()
@@ -51,7 +51,7 @@ struct HomeViewRow: View {
                         Image(systemName: "text.book.closed")
                             .resizable()
                             .frame(width:15, height:15)
-                        Text("\(count) lessons")
+                        Text("\(count) \(type)")
                             .font(Font.system(size:10))
                         
                         Image(systemName: "clock")
@@ -73,6 +73,6 @@ struct HomeViewRow: View {
 
 struct HomeViewRow_Previews: PreviewProvider {
     static var previews: some View {
-        HomeViewRow(image: "swift", title: "Learn Swift", description: "some description 2", count: "11", time: "3 hours")
+        HomeViewRow(image: "swift", title: "Learn Swift", description: "some description 2", count: "11", time: "3 hours", type: "Lessons")
     }
 }
