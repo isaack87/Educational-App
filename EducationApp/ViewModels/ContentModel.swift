@@ -13,10 +13,16 @@ class ContentModel: ObservableObject {
     @Published var modules = [Module]()
     
     // Current Module selected
-    @Published var currentModel: Module?
+    @Published var currentModule: Module?
     var currentModuleIndex = 0
     
+    // current selected detailed view
+    @Published var currentLesson: Lesson?
+    var currentLessonIndex = 0
     
+    //current lesson explaination
+    @Published var lessonDescription = NSAttributedString()
+
     var styleData: Data?
     
     
@@ -76,7 +82,77 @@ class ContentModel: ObservableObject {
         }
         
         // set current module
-        currentModel = modules[currentModuleIndex]
+        currentModule = modules[currentModuleIndex]
         
+    }
+    
+    func beginLesson(lessonIndex:Int) {
+        
+        // check that lesson index is within range of module lessons
+        if (lessonIndex < currentModule!.content.lessons.count) {
+            currentLessonIndex = lessonIndex
+        } else {
+            currentLessonIndex = 0
+        }
+
+        // set current lesson
+        currentLesson = currentModule!.content.lessons[currentLessonIndex]
+        lessonDescription = addStyling(currentLesson!.explanation)
+    }
+    
+    
+    func hasNextLesson() -> Bool {
+        if currentLessonIndex + 1 < currentModule!.content.lessons.count {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func nextLesson() {
+        
+        // takes you to next lesson
+        currentLessonIndex += 1
+        
+        // check range to see if next lesson exist
+        if currentLessonIndex < currentModule!.content.lessons.count {
+            
+            // sets current lesson to next when button is clicked
+            currentLesson = currentModule!.content.lessons[currentLessonIndex]
+            lessonDescription = addStyling(currentLesson!.explanation)
+            
+        } else {
+            
+            // reset lessons state if there is no next lessons
+            currentLesson = nil
+            currentLessonIndex = 0
+        }
+    }
+    
+    // MARK - Code Styling
+    
+    private func addStyling(_ htmlString: String) -> NSAttributedString {
+        
+        var resultString = NSAttributedString()
+        var data = Data()
+        
+        if (styleData != nil) {
+            // Add styling data
+            data.append(self.styleData!)
+        }
+        
+        // Add html data
+        data.append(Data(htmlString.utf8))
+        
+        // conter to attributed string
+        do {
+            let attributedString = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+                resultString = attributedString
+        }
+        catch {
+            print(" Coult not convert html to attributed String")
+        }
+        
+        return resultString
     }
 }

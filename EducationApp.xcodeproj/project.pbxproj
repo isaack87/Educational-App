@@ -18,6 +18,10 @@
 		9A7C773629D2A31A00E17ABF /* HomeViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C773529D2A31A00E17ABF /* HomeViewRow.swift */; };
 		9A7C773829D37B8A00E17ABF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C773729D37B8A00E17ABF /* ContentView.swift */; };
 		9A7C773A29D388E700E17ABF /* ContentViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C773929D388E700E17ABF /* ContentViewRow.swift */; };
+		9A7C773C29D3951400E17ABF /* ContentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C773B29D3951400E17ABF /* ContentDetailView.swift */; };
+		9A7C773F29D3990400E17ABF /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7C773E29D3990300E17ABF /* AVKit.framework */; };
+		9A7C774129D39A9600E17ABF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C774029D39A9600E17ABF /* Constants.swift */; };
+		9A7C774329D4C43800E17ABF /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C774229D4C43800E17ABF /* CodeTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		9A7C773529D2A31A00E17ABF /* HomeViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewRow.swift; sourceTree = "<group>"; };
 		9A7C773729D37B8A00E17ABF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9A7C773929D388E700E17ABF /* ContentViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewRow.swift; sourceTree = "<group>"; };
+		9A7C773B29D3951400E17ABF /* ContentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailView.swift; sourceTree = "<group>"; };
+		9A7C773E29D3990300E17ABF /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		9A7C774029D39A9600E17ABF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9A7C774229D4C43800E17ABF /* CodeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7C773F29D3990400E17ABF /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +60,7 @@
 			children = (
 				9A7C771329D2633D00E17ABF /* EducationApp */,
 				9A7C771229D2633D00E17ABF /* Products */,
+				9A7C773D29D3990300E17ABF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +102,8 @@
 				9A7C773529D2A31A00E17ABF /* HomeViewRow.swift */,
 				9A7C773729D37B8A00E17ABF /* ContentView.swift */,
 				9A7C773929D388E700E17ABF /* ContentViewRow.swift */,
+				9A7C773B29D3951400E17ABF /* ContentDetailView.swift */,
+				9A7C774229D4C43800E17ABF /* CodeTextView.swift */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -117,6 +129,7 @@
 			children = (
 				9A7C772A29D2668900E17ABF /* data.json */,
 				9A7C772929D2668900E17ABF /* style.html */,
+				9A7C774029D39A9600E17ABF /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -126,6 +139,14 @@
 			children = (
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9A7C773D29D3990300E17ABF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A7C773E29D3990300E17ABF /* AVKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,10 +224,13 @@
 				9A7C771729D2633D00E17ABF /* HomeView.swift in Sources */,
 				9A7C773629D2A31A00E17ABF /* HomeViewRow.swift in Sources */,
 				9A7C773829D37B8A00E17ABF /* ContentView.swift in Sources */,
+				9A7C773C29D3951400E17ABF /* ContentDetailView.swift in Sources */,
 				9A7C771529D2633D00E17ABF /* EducationalApp.swift in Sources */,
 				9A7C773A29D388E700E17ABF /* ContentViewRow.swift in Sources */,
+				9A7C774329D4C43800E17ABF /* CodeTextView.swift in Sources */,
 				9A7C772829D2647C00E17ABF /* ContentModel.swift in Sources */,
 				9A7C773229D2845B00E17ABF /* Module.swift in Sources */,
+				9A7C774129D39A9600E17ABF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
