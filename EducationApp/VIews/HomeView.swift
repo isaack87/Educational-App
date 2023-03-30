@@ -3,7 +3,7 @@
 //  EducationApp
 //
 //  Created by Isaac Kim on 3/27/23.
-//
+// $ binding allows read and write through published
 
 import SwiftUI
 
@@ -13,7 +13,6 @@ struct HomeView: View {
     
     var body: some View {
        
-        
         NavigationView {
             VStack(alignment: .leading) {
             Text("What do you want to do today?")
@@ -30,10 +29,14 @@ struct HomeView: View {
                                     ContentView()
                                     .onAppear(perform: {
                                         model.beginModule(moduleid: module.id)
+                                        print(model.currentContentSelected)
                             }),
+                                tag: module.id,
+                                selection: $model.currentContentSelected,
                                 label: {
                                 HomeViewRow(image: module.content.image, title: "Learn \(module.category)", description: module.content.description, count:String(module.content.lessons.count), time: module.content.time, type: "Lessons")
                                 })
+                            
                             
                                            
                                 //Test Card
