@@ -23,7 +23,7 @@ struct ContentView: View {
                             destination:
                                 ContentDetailView()
                                 .onAppear(perform: {
-                                    model.beginLesson(lessonIndex: index)
+                                    model.beginLesson(index)
                                 }),
                             label: {
                                 ContentViewRow(index: index)
@@ -33,7 +33,7 @@ struct ContentView: View {
             }
             .padding(20)
             .accentColor(.black)
-            .navigationTitle("Learn \(model.currentModule?.category ?? "")")
+            .navigationBarTitle("Learn \(model.currentModule?.category ?? "")")
             
         }
     }

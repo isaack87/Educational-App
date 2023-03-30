@@ -22,7 +22,7 @@ struct CodeTextView: UIViewRepresentable {
     func updateUIView(_ uiTextView: UITextView, context: Context) {
         
         //set attributed text
-        uiTextView.attributedText = model.lessonDescription
+        uiTextView.attributedText = model.codeText
         
         //scroll back to the top
         uiTextView.setContentOffset(.zero, animated: true)

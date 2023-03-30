@@ -23,24 +23,33 @@ struct HomeView: View {
                     ForEach(model.modules) { module in
                         
                         VStack(spacing: 20) {
-                        //Learning Card
+                            
+                            //Learning Card
                             NavigationLink(
                                 destination:
                                     ContentView()
                                     .onAppear(perform: {
-                                        model.beginModule(moduleid: module.id)
+                                        model.beginModule(module.id)
                                         print(model.currentContentSelected)
-                            }),
+                                }),
                                 tag: module.id,
                                 selection: $model.currentContentSelected,
                                 label: {
                                 HomeViewRow(image: module.content.image, title: "Learn \(module.category)", description: module.content.description, count:String(module.content.lessons.count), time: module.content.time, type: "Lessons")
                                 })
                             
-                            
-                                           
-                                //Test Card
+                            //Test Card
+                            NavigationLink(
+                                destination:
+                                    TestView()
+                                    .onAppear(perform: {
+                                        model.beginTest(module.id)
+                                }),
+                                tag: module.id,
+                                selection: $model.currentTestSelected,
+                                label: {
                                 HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: String(module.test.questions.count), time: String("\((module.test.time).prefix(6))s"), type: "Questions")
+                                })
                         }
                     }
                 }

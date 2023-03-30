@@ -16,15 +16,21 @@ class ContentModel: ObservableObject {
     @Published var currentModule: Module?
     var currentModuleIndex = 0
     
-    // current selected detailed view
+    // current lesson
     @Published var currentLesson: Lesson?
     var currentLessonIndex = 0
     
+    // current question
+    @Published var currentQuestion: Question?
+    var currentQuestionIndex = 0
+    
     //current lesson explaination
-    @Published var lessonDescription = NSAttributedString()
+    @Published var codeText = NSAttributedString()
 
     //current selected content and test
     @Published var currentContentSelected:Int?
+    @Published var currentTestSelected:Int?
+    
     
     var styleData: Data?
     
@@ -71,7 +77,7 @@ class ContentModel: ObservableObject {
     
     // MARK: - Module Natvigation Methods
     
-    func beginModule(moduleid:Int) {
+    func beginModule(_ moduleid:Int) {
         
         // find the index for this module id
         for index in 0..<modules.count {
@@ -89,7 +95,7 @@ class ContentModel: ObservableObject {
         
     }
     
-    func beginLesson(lessonIndex:Int) {
+    func beginLesson(_ lessonIndex:Int) {
         
         // check that lesson index is within range of module lessons
         if (lessonIndex < currentModule!.content.lessons.count) {
@@ -100,7 +106,7 @@ class ContentModel: ObservableObject {
 
         // set current lesson
         currentLesson = currentModule!.content.lessons[currentLessonIndex]
-        lessonDescription = addStyling(currentLesson!.explanation)
+        codeText = addStyling(currentLesson!.explanation)
     }
     
     
@@ -122,13 +128,30 @@ class ContentModel: ObservableObject {
             
             // sets current lesson to next when button is clicked
             currentLesson = currentModule!.content.lessons[currentLessonIndex]
-            lessonDescription = addStyling(currentLesson!.explanation)
+            codeText = addStyling(currentLesson!.explanation)
             
         } else {
             
             // reset lessons state if there is no next lessons
             currentLesson = nil
             currentLessonIndex = 0
+        }
+    }
+    
+    
+    func beginTest (_ moduleId:Int) {
+        
+        // set current module
+        beginModule(moduleId)
+        
+        // set current question
+        currentQuestionIndex = 0
+        
+        if currentModule?.test.questions.count ?? 0  > 0 {
+            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
+            //set question content
+            codeText = addStyling(currentQuestion!.content)
+            
         }
     }
     

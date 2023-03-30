@@ -23,6 +23,7 @@
 		9A7C774129D39A9600E17ABF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C774029D39A9600E17ABF /* Constants.swift */; };
 		9A7C774329D4C43800E17ABF /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C774229D4C43800E17ABF /* CodeTextView.swift */; };
 		9A7C774529D51EB700E17ABF /* RectangleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C774429D51EB700E17ABF /* RectangleCard.swift */; };
+		9A7C774729D5221700E17ABF /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7C774629D5221700E17ABF /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		9A7C774029D39A9600E17ABF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9A7C774229D4C43800E17ABF /* CodeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		9A7C774429D51EB700E17ABF /* RectangleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleCard.swift; sourceTree = "<group>"; };
+		9A7C774629D5221700E17ABF /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				9A7C773B29D3951400E17ABF /* ContentDetailView.swift */,
 				9A7C774229D4C43800E17ABF /* CodeTextView.swift */,
 				9A7C774429D51EB700E17ABF /* RectangleCard.swift */,
+				9A7C774629D5221700E17ABF /* TestView.swift */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7C774729D5221700E17ABF /* TestView.swift in Sources */,
 				9A7C771729D2633D00E17ABF /* HomeView.swift in Sources */,
 				9A7C773629D2A31A00E17ABF /* HomeViewRow.swift in Sources */,
 				9A7C773829D37B8A00E17ABF /* ContentView.swift in Sources */,
