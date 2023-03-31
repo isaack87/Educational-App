@@ -31,7 +31,6 @@ class ContentModel: ObservableObject {
     @Published var currentContentSelected:Int?
     @Published var currentTestSelected:Int?
     
-    
     var styleData: Data?
     
     
@@ -138,6 +137,20 @@ class ContentModel: ObservableObject {
         }
     }
     
+    func nextQuestion() {
+        currentQuestionIndex += 1
+        if currentQuestionIndex < currentModule?.test.questions.count ?? 1 {
+            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
+            //set question content
+            codeText = addStyling(currentQuestion!.content)
+
+        } else {
+            
+           currentQuestionIndex = 0
+            currentQuestion = nil
+        }
+
+    }
     
     func beginTest (_ moduleId:Int) {
         
