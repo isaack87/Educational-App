@@ -13,6 +13,7 @@ struct TestView: View {
     @State var selectedAnswerIndex:Int?
     @State var numCorrect = 0
     @State var submitted = false
+    @State var finished = false
     
     var body: some View {
         
@@ -85,13 +86,12 @@ struct TestView: View {
                             numCorrect += 1
                         }
                         
-                        
                     }
                     
                 } label: {
                     ZStack {
                         RectangleCard(color: .green).frame(height: 48)
-                        Text(!submitted ? "submit" : "next")
+                        Text(buttonText)
                             .bold()
                             .foregroundColor(.white)
                         
@@ -100,14 +100,27 @@ struct TestView: View {
                 .disabled(selectedAnswerIndex == nil)
                 .accentColor(.black)
                 .padding()
-                
-                
-                
+
             }
             .navigationBarTitle("\(model.currentModule?.category ?? "") Test")
             
         } else {
             ProgressView()
+        }
+    }
+    
+    var buttonText: String {
+        
+        // check if answer has been submitted
+        if submitted == true {
+            if model.currentQuestionIndex + 1 == model.currentModule!.test.questions.count {
+                return "Finished"
+            } else {
+                return "Next"
+            }
+
+        } else {
+            return "Submit"
         }
     }
     
