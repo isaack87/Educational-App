@@ -168,6 +168,30 @@ class ContentModel: ObservableObject {
         }
     }
     
+    // MARK - calculate test score percentage
+    
+    func calculateTestResults (_ correct:Int) -> String {
+        
+        var result = ""
+        
+        // if current model is not set yet will not return error
+        guard currentModule?.test.questions.count != nil else {
+            return ""
+        }
+        
+        let percentage = Double(correct) / Double(currentModule!.test.questions.count)
+        
+        if (percentage < 0.5) {
+            result = "Keep Learning"
+        } else if (percentage < 0.7) {
+            result = "You Passed"
+        } else {
+            result = "You did Great!"
+        }
+        
+        return result
+    }
+    
     // MARK - Code Styling
     
     private func addStyling(_ htmlString: String) -> NSAttributedString {
