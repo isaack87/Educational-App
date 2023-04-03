@@ -26,7 +26,7 @@ class ContentModel: ObservableObject {
     
     //current lesson explaination
     @Published var codeText = NSAttributedString()
-
+    
     //current selected content and test
     @Published var currentContentSelected:Int?
     @Published var currentTestSelected:Int?
@@ -35,7 +35,11 @@ class ContentModel: ObservableObject {
     
     
     init () {
+        // get data from local storage
         getLocalData()
+        
+        // get test data from github ublic pages
+        getRemoteData()
     }
     
     // MARK: - Data Methods
@@ -45,26 +49,23 @@ class ContentModel: ObservableObject {
         let jsonUrl = Bundle.main.url(forResource: "data", withExtension: "json")
         
         do {
-        // Create a data object
-        let jsonData = try Data(contentsOf: jsonUrl!)
+            // Create a data object
+            let jsonData = try Data(contentsOf: jsonUrl!)
             
-        // Decode the data with a JSON decoder
-        let jsonDecoder = JSONDecoder()
-        let modules = try jsonDecoder.decode([Module].self, from: jsonData)
-        // sets the published var in line 12
-        self.modules = modules
-    }
-    catch {
-        // error with getting data
-        print(error)
-    }
-        
+            // Decode the data with a JSON decoder
+            let jsonDecoder = JSONDecoder()
+            let modules = try jsonDecoder.decode([Module].self, from: jsonData)
+            // sets the published var in line 12
+            self.modules = modules
+        }
+        catch {
+            // error with getting data
+            print(error)
+        }
         // parse style data
-        
         let styleUrl = Bundle.main.url(forResource: "style", withExtension: "html")
         
         do {
-            
             // Read the file into a data onject
             let styleData = try Data(contentsOf: styleUrl!)
             self.styleData = styleData
@@ -72,7 +73,56 @@ class ContentModel: ObservableObject {
         catch {
             print("Couldn't parse local data")
         }
-}
+    }
+    
+    
+    
+    func getRemoteData() {
+        let urlString = "https://isaack87.github.io/json-testdata-learning-app/data2.json"
+        // check for nil since optional
+        let url = URL(string: urlString)
+        
+        // if u cant find url
+        guard url != nil else {
+            return
+        }
+        
+        // Create a URL request Object
+        let request = URLRequest(url: url!)
+        
+        // singleton is one session for user (shared)
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: request) { (data, response, error) in
+            
+            // check if there an error
+            guard error == nil else {
+                // Error check return
+                return
+            }
+
+            do {
+                // create json decorder
+                let decorder = JSONDecoder()
+                
+                // Decode data
+                let modules = try decorder.decode([Module].self, from: data!)
+                
+                // Append parsed modules into modules property
+                // Method below assigns to mainthread instead of background thread to speed up View load
+                DispatchQueue.main.sync {
+                    self.modules += modules
+                }
+         
+                
+            } catch {
+                // cant parse json
+                print("cant parse json server file")
+            }
+        }
+        dataTask.resume()
+    }
+    
     
     // MARK: - Module Natvigation Methods
     
@@ -102,7 +152,7 @@ class ContentModel: ObservableObject {
         } else {
             currentLessonIndex = 0
         }
-
+        
         // set current lesson
         currentLesson = currentModule!.content.lessons[currentLessonIndex]
         codeText = addStyling(currentLesson!.explanation)
@@ -143,13 +193,13 @@ class ContentModel: ObservableObject {
             currentQuestion = currentModule!.test.questions[currentQuestionIndex]
             //set question content
             codeText = addStyling(currentQuestion!.content)
-
+            
         } else {
             
-           currentQuestionIndex = 0
+            currentQuestionIndex = 0
             currentQuestion = nil
         }
-
+        
     }
     
     func beginTest (_ moduleId:Int) {
@@ -210,7 +260,7 @@ class ContentModel: ObservableObject {
         // conter to attributed string
         do {
             let attributedString = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-                resultString = attributedString
+            resultString = attributedString
         }
         catch {
             print(" Coult not convert html to attributed String")
